@@ -5,8 +5,29 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
+    <dv-alert :show="show"/>
+    <button @click="show = true">Press me</button>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  data: () => ({
+    show: false
+  }),
+  mounted () {
+    setTimeout(() => {
+      this.showAlert(true)
+    }, 1000)
+  },
+  methods: {
+    showAlert (show) {
+      this.show = show
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
