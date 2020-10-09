@@ -9,9 +9,6 @@
 
 <script>
 export default {
-  // data: () => ({
-  //   showAlertComponent: false
-  // }),
   data: () => ({
     showAlert: false
   }),
@@ -37,11 +34,29 @@ export default {
     show: {
       type: Boolean,
       default: false
+    },
+    timeout: {
+      type: String,
+      validator (timeout) {
+        var timeType = timeout.substring(timeout.length - 1)
+        return ['s', 'm'].indexOf(timeType) > -1
+      }
     }
   },
   methods: {
     closeAlert () {
       this.showAlert = false
+      this.$emit('toggleAlert', false)
+    },
+    openAlert () {
+      this.showAlert = true
+      this.$emit('toggleAlert', true)
+    },
+    reopenAlert () {
+      this.closeAlert()
+      setTimeout(() => {
+        this.openAlert()
+      }, 250)
     }
   },
   computed: {
@@ -52,29 +67,35 @@ export default {
   watch: {
     show (show) {
       this.showAlert = show
+    },
+    showAlert (ifShow) {
+      if (ifShow && this.timeout) {
+        var time = parseInt(this.timeout, 10)
+        const timeType = this.timeout.substring(this.timeout.length - 1)
+        switch (timeType) {
+          case 's':
+            time *= 1000
+            break
+          case 'm':
+            time *= 1000 * 60
+            break
+        }
+
+        setTimeout(() => {
+          this.closeAlert()
+        }, time)
+      }
+    },
+    text (text) {
+      this.reopenAlert()
+    },
+    type (type) {
+      this.reopenAlert()
+    },
+    position (type) {
+      this.reopenAlert()
     }
   }
-  // methods: {
-  //   closeAlert () {
-  //     this.showAlertComponent = false
-  //   }
-  // },
-  // computed: {
-  //   showAlert () {
-  //     return this.show
-  //   },
-  //   transitionName () {
-  //     return this.position.toLowerCase() === 'top' ? 'slide-down' : 'slide-up'
-  //   }
-  // },
-  // watch: {
-  //   show (show) {
-  //     console.log(show)
-  //   },
-  //   showAlert (show) {
-  //     this.showAlertComponent = show
-  //   }
-  // }
 }
 </script>
 
@@ -87,17 +108,18 @@ export default {
     margin: 0 10px;
     border: 1px solid gray;
     border-radius: 5px;
+    box-shadow: 2px 2px 3px 2px #DDD;
     text-align: left;
     z-index: 200;
     p {
       margin: 0;
+      font-family: 'Roboto', sans-serif;
       &:nth-of-type(1) {
         flex: 1;
         padding: 10px;
       }
       &:nth-of-type(2) {
         padding: 10px;
-        font-weight: bold;
         cursor: pointer;
       }
     }
@@ -111,7 +133,7 @@ export default {
   }
 
   .dv-alert__error {
-    background-color: lightcoral;
+    background-color: #ffa8a8;
   }
   .dv-alert__success {
     background-color: lightgreen;
@@ -128,9 +150,9 @@ export default {
     transition: transform .25s ease;
   }
   .slide-down-enter, .slide-down-leave-to {
-    transform: translateY(-150%);
+    transform: translateY(-125%);
   }
   .slide-up-enter, .slide-up-leave-to {
-    transform: translateY(150%);
+    transform: translateY(125%);
   }
 </style>

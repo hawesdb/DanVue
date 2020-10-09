@@ -5,8 +5,15 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
-    <dv-alert :show="show"/>
-    <button @click="show = true">Press me</button>
+    <dv-alert
+      :show="show"
+      v-on:toggleAlert="toggleAlert"
+      :text="alertText"
+      :type="alertType"
+      :position="alertPosition"
+      timeout="1m"/>
+    <button @click="toggleAlert(true)">Press me</button>
+    <button @click="changeAlert">Change</button>
   </div>
 </template>
 
@@ -14,16 +21,18 @@
 export default {
   name: 'App',
   data: () => ({
-    show: false
+    show: false,
+    alertText: 'This an alert text! Please remain calm!',
+    alertType: 'error',
+    alertPosition: 'top'
   }),
-  mounted () {
-    setTimeout(() => {
-      this.showAlert(true)
-    }, 1000)
-  },
   methods: {
-    showAlert (show) {
+    toggleAlert (show) {
       this.show = show
+    },
+    changeAlert () {
+      this.alertText = 'See this is not an issue'
+      this.alertType = 'success'
     }
   }
 }
