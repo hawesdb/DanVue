@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('~@/assets/fonts/Roboto/Roboto-Regular.ttf')
+}
+@font-face {
+  font-family: 'Anton';
+  src: url('~@/assets/fonts/Anton/Anton-Regular.ttf')
+}
+@font-face {
+  font-family: 'Quicksand';
+  src: url('~@/assets/fonts/Quicksand/Quicksand-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Quicksand';
+  src: url('~@/assets/fonts/Quicksand/Quicksand-SemiBold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+:root {
+  --dark: #2D2D2D;
+  --darkgray: #585858;
+  --blue: #5e8ff8;
+  --darkblue: #465de0;
+  --red: #f85e5e;
+  --darkred: #e04646;
+  --orange: #f8af5e;
+  --darkorange: #e08b46;
+  --green: #5ef86b;
+  --darkgreen: #46e04e;
+}

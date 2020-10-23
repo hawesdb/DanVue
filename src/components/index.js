@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import dvAlert from './Alert'
+import dvButton from './Button'
 
 const Components = {
-  dvAlert
+  dvAlert,
+  dvButton
 }
 
 Object.keys(Components).forEach(name => {

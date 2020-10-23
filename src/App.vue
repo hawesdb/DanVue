@@ -1,19 +1,14 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
     <dv-alert
       :show="show"
       v-on:toggleAlert="toggleAlert"
       :text="alertText"
       :type="alertType"
       :position="alertPosition"
-      timeout="1m"/>
-    <button @click="toggleAlert(true)">Press me</button>
-    <button @click="changeAlert">Change</button>
+      :timeout="alertTimeout"/>
+    <router-view/>
+    <dv-button style="width: 400px; height: 500px;">This is a test of an extra long button, shouldn't work</dv-button>
   </div>
 </template>
 
@@ -24,7 +19,8 @@ export default {
     show: false,
     alertText: 'This an alert text! Please remain calm!',
     alertType: 'error',
-    alertPosition: 'top'
+    alertPosition: 'top',
+    alertTimeout: '5s'
   }),
   methods: {
     toggleAlert (show) {
@@ -45,6 +41,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  // background-color: #998b8b;
 }
 
 #nav {
@@ -58,5 +55,17 @@ export default {
       color: #42b983;
     }
   }
+}
+
+#light-background {
+  display: flex;
+  padding: 20px 10px;
+  border: 1px solid var(--dark);
+}
+#dark-background {
+  display: flex;
+  padding: 20px 10px;
+  border: 1px solid var(--dark);
+  background-color: var(--dark);
 }
 </style>

@@ -29,7 +29,8 @@ export default {
     },
     text: {
       type: String,
-      default: 'This is a test error message'
+      default: 'This is a test error message',
+      required: true
     },
     show: {
       type: Boolean,
@@ -39,7 +40,7 @@ export default {
       type: String,
       validator (timeout) {
         var timeType = timeout.substring(timeout.length - 1)
-        return ['s', 'm'].indexOf(timeType) > -1
+        return ['s', 'm'].indexOf(timeType.toLowerCase()) > -1
       }
     }
   },
@@ -53,10 +54,12 @@ export default {
       this.$emit('toggleAlert', true)
     },
     reopenAlert () {
-      this.closeAlert()
-      setTimeout(() => {
-        this.openAlert()
-      }, 250)
+      if (this.showAlert) {
+        this.closeAlert()
+        setTimeout(() => {
+          this.openAlert()
+        }, 250)
+      }
     }
   },
   computed: {
@@ -71,7 +74,7 @@ export default {
     showAlert (ifShow) {
       if (ifShow && this.timeout) {
         var time = parseInt(this.timeout, 10)
-        const timeType = this.timeout.substring(this.timeout.length - 1)
+        const timeType = this.timeout.substring(this.timeout.length - 1).toLowerCase()
         switch (timeType) {
           case 's':
             time *= 1000
@@ -108,7 +111,7 @@ export default {
     margin: 0 10px;
     border: 1px solid gray;
     border-radius: 5px;
-    box-shadow: 2px 2px 3px 2px #DDD;
+    box-shadow: 2px 2px 3px 2px #DDDDDDCC;
     text-align: left;
     z-index: 200;
     p {
