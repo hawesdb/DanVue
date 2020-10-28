@@ -2,9 +2,13 @@
   <button @click="emitClick" class="dv-button" :class="`
     ${buttonColor ? buttonColor : ''}
     ${icon ? 'icon' : ''}
+    ${tile ? 'tile' : ''}
     `">
     <slot v-if="!icon">Button</slot>
-    <slot v-else><img :src="require('@/assets/sampleIcon.png')"></slot>
+    <slot v-else>
+      <img :src="require('@/assets/sampleIconWhite.png')" v-if="dark">
+      <img :src="require('@/assets/sampleIcon.png')" v-else>
+    </slot>
   </button>
 </template>
 
@@ -16,7 +20,8 @@ export default {
     orange: Boolean,
     success: Boolean,
     error: Boolean,
-    icon: Boolean
+    icon: Boolean,
+    tile: Boolean
   },
   methods: {
     emitClick (text) {
@@ -139,6 +144,9 @@ export default {
       width: 16px;
       height: auto;
     }
+  }
+  .tile {
+    border-radius: 0;
   }
 </style>
 

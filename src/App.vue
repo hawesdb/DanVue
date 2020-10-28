@@ -7,16 +7,9 @@
       :type="alertType"
       :position="alertPosition"
       :timeout="alertTimeout"/>
-    <router-view/>
-    <dv-button></dv-button>
-    <dv-button icon></dv-button>
-    <div style="position: absolute;padding: 20px; background-color: #2D2D2D">
-      <dv-button dark></dv-button>
+    <div id="main-menu">
     </div>
-    <dv-button orange></dv-button>
-    <dv-button primary></dv-button>
-    <dv-button success></dv-button>
-    <dv-button error></dv-button>
+    <router-view/>
   </div>
 </template>
 
@@ -52,28 +45,8 @@ export default {
   // background-color: #998b8b;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-
-#light-background {
-  display: flex;
-  padding: 20px 10px;
-  border: 1px solid var(--dark);
-}
-#dark-background {
-  display: flex;
-  padding: 20px 10px;
-  border: 1px solid var(--dark);
-  background-color: var(--dark);
+#main-menu {
+  height:48px;
+  border: 1px solid lightgray;
 }
 </style>
