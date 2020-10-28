@@ -8,7 +8,15 @@
       :position="alertPosition"
       :timeout="alertTimeout"/>
     <router-view/>
-    <dv-button style="width: 400px; height: 500px;">This is a test of an extra long button, shouldn't work</dv-button>
+    <dv-button></dv-button>
+    <dv-button icon></dv-button>
+    <div style="position: absolute;padding: 20px; background-color: #2D2D2D">
+      <dv-button dark></dv-button>
+    </div>
+    <dv-button orange></dv-button>
+    <dv-button primary></dv-button>
+    <dv-button success></dv-button>
+    <dv-button error></dv-button>
   </div>
 </template>
 

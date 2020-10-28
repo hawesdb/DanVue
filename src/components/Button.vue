@@ -1,23 +1,48 @@
 <template>
-  <button @click="emitClick" @mousedown="pulseColor" class="dv-button">
-    <slot>Button</slot>
+  <button @click="emitClick" class="dv-button" :class="`
+    ${buttonColor ? buttonColor : ''}
+    ${icon ? 'icon' : ''}
+    `">
+    <slot v-if="!icon">Button</slot>
+    <slot v-else><img :src="require('@/assets/sampleIcon.png')"></slot>
   </button>
 </template>
 
 <script>
 export default {
-  created () {
+  props: {
+    primary: Boolean,
+    dark: Boolean,
+    orange: Boolean,
+    success: Boolean,
+    error: Boolean,
+    icon: Boolean
   },
   methods: {
     emitClick (text) {
       this.$emit('click')
+    }
+  },
+  computed: {
+    colorList () {
+      return [
+        { primary: this.primary },
+        { dark: this.dark },
+        { orange: this.orange },
+        { success: this.success },
+        { error: this.error }
+      ]
     },
-    pulseColor (event) {
-      console.log(event)
-      console.log(event.offsetX)
-      console.log(event.offsetY)
-      // event.target.style.backgroundImage = `radial-gradient(farthest-corner at ${event.offsetX}px ${event.offsetY}px, lightgray 0%, white 100%)`
-      // event.target.style.backgroundSize = '500% 500%'
+    buttonColor () {
+      const colorsSet = this.colorList.filter(function (color) {
+        return Object.values(color)[0] === true
+      })
+
+      if (colorsSet.length === 1) {
+        return Object.keys(colorsSet[0])[0]
+      } else {
+        return null
+      }
     }
   }
 }
@@ -25,30 +50,95 @@ export default {
 
 <style lang="scss" scoped>
   .dv-button {
+    --dark: #2D2D2D;
+    --orange: #f8af5e;
+    --darkorange: #e08b46;
+    --blue: #5e8ff8;
+    --darkblue: #4572d3;
+    --green: #53d442;
+    --darkgreen: #33a824;
+    --red: #ff5252;
+    --darkred: #da3737;
+  }
+
+  .dv-button {
+    position: relative;
+    margin: 0 1px;
+    top: 0;
     padding: 5px 10px;
     border: 1px solid #AAA;
     border-radius: 5px;
-    box-shadow: 0 1px 0 0 gray, 0 0 0 0 inset gray;
+    box-shadow: 0 1px 0 0 gray, 0 1px 0 0 #CCC;
     background-size: 100% 100%;
     background-color: #F5F5F5;
     font-family: 'Quicksand', sans-serif;
     font-size: .9em;
     font-weight: bold;
-    transition: box-shadow .15s ease, background-size .5s ease;
+    transition: box-shadow .1s ease, top .1s ease;
     cursor: pointer;
-    &:hover {
-      box-shadow: 0 1px 0 0 gray, 0 0 0 0 inset gray, 0 2px 4px 2px lightgray;
+    &:hover:not(:disabled) {
+      box-shadow: 0 1px 0 0 gray, 0 1px 4px 2px #CCC;
     }
     &:focus {
       outline: none;
     }
     &:active {
-      box-shadow: 0 1px 0 0 gray, 0 0 50px 50px inset black;
+      top: 1px;
+      box-shadow: none !important;
+    }
+    &:disabled {
+      cursor: default;
     }
   }
 
-  .clicked {
+  .dark {
+    color: white;
+    background-color: var(--dark);
+    &:disabled {
+      color: rgba(255,255,255,.3);
+    }
+  }
+  .orange {
+    border-color: var(--darkorange);
+    box-shadow: 0 1px 0 0 var(--darkorange), 0 0 0 0 #CCC;
+    background-color: var(--orange);
+    &:hover:not(:disabled) {
+      box-shadow: 0 1px 0 0 var(--darkorange), 0 1px 4px 2px #CCC;
+    }
+  }
+  .primary {
+    border-color: var(--darkblue);
+    box-shadow: 0 1px 0 0 var(--darkblue), 0 0 0 0 #CCC;
+    background-color: var(--blue);
+    &:hover:not(:disabled) {
+      box-shadow: 0 1px 0 0 var(--darkblue), 0 1px 4px 2px #CCC;
+    }
+  }
+  .success {
+    border-color: var(--darkgreen);
+    box-shadow: 0 1px 0 0 var(--darkgreen), 0 0 0 0 #CCC;
+    background-color: var(--green);
+    &:hover:not(:disabled) {
+      box-shadow: 0 1px 0 0 var(--darkgreen), 0 1px 4px 2px #CCC;
+    }
+  }
+  .error {
+    border-color: var(--darkred);
+    box-shadow: 0 1px 0 0 var(--darkred), 0 0 0 0 #CCC;
+    background-color: var(--red);
+    &:hover:not(:disabled) {
+      box-shadow: 0 1px 0 0 var(--darkred), 0 1px 4px 2px #CCC;
+    }
+  }
 
+  .icon {
+    padding: 5px;
+    border-radius: 50%;
+    img {
+      display: block;
+      width: 16px;
+      height: auto;
+    }
   }
 </style>
 
