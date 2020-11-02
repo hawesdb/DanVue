@@ -7,8 +7,7 @@
       :type="alertType"
       :position="alertPosition"
       :timeout="alertTimeout"/>
-    <div id="main-menu">
-    </div>
+    <dv-navbar/>
     <router-view/>
   </div>
 </template>
@@ -36,6 +35,10 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  margin: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
