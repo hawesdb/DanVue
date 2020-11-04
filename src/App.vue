@@ -7,7 +7,10 @@
       :type="alertType"
       :position="alertPosition"
       :timeout="alertTimeout"/>
-    <dv-navbar/>
+    <dv-navbar>
+      <dv-route to="/" mainLink>DanielHawes</dv-route>
+      <dv-route to="/About">About</dv-route>
+    </dv-navbar>
     <router-view/>
   </div>
 </template>
