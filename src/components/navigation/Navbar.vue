@@ -13,8 +13,8 @@ export default {
   .dv-navbar {
     display: flex;
     position: relative;
-    min-height: 42px;
-    padding: 5px 5px 0;
+    min-height: 48px;
+    padding: 5px;
     border-bottom: 2px solid lightgray;
     box-shadow: 0 1px 4px 1px lightgray;
     text-align: left;

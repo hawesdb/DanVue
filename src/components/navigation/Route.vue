@@ -1,5 +1,8 @@
 <template>
-  <router-link :to="to" class="dv-route" :class="`${mainLink ? 'main-link' : ''}`">
+  <router-link :to="to" class="dv-route" :style="cssVars" :class="`
+    ${mainLink ? 'dv-main-link' : ''}
+    ${stretch ? 'dv-stretch' : ''}
+    `">
     <slot>Route</slot>
   </router-link>
 </template>
@@ -8,32 +11,59 @@
 export default {
   props: {
     to: String,
-    mainLink: Boolean
+    mainLink: Boolean,
+    stretch: Boolean,
+    hoverColor: {
+      type: String,
+      default: '#e08b46'
+    },
+    activeColor: {
+      type: String,
+      default: '#f8af5e'
+    }
+  },
+  computed: {
+    cssVars () {
+      return {
+        '--hover-color': this.hoverColor,
+        '--active-color': this.activeColor
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
   .dv-route {
+    --orange: #f8af5e;
+    --darkorange: #e08b46;
+  }
+
+  .dv-route {
     display: flex;
     align-self: stretch;
     place-items: center;
+    justify-content: center;
     padding: 0 8px;
     color: #2D2D2D;
     text-decoration: none;
-    font-weight: bold;
+    font-family: 'Ubuntu', sans-serif;
     transition: box-shadow .25s ease;
-    &.router-link-active:not(.main-link) {
-      box-shadow: 0 -3px 0 0 inset #2D2D2D;
-    }
-    &:hover {
-      box-shadow: 0 -5px 0 0 inset #2D2D2D;
+    &:not(.dv-main-link) {
+      &.router-link-active {
+        box-shadow: 0 5px 0 0 var(--active-color) !important;
+      }
+      &:hover {
+        box-shadow: 0 8px 0 0 var(--hover-color);
+      }
     }
   }
 
-  .main-link {
-    &.router-link-exact-active {
-      box-shadow: 0 -3px 0 0 inset #2D2D2D;
-    }
+  .dv-main-link {
+    font-size: 1.5em;
+  }
+
+  .dv-stretch {
+    flex: 1;
   }
 </style>
