@@ -2,7 +2,7 @@
   <router-link :to="to" class="dv-route" :style="cssVars" :class="`
     ${mainLink ? 'dv-main-link' : ''}
     ${stretch ? 'dv-stretch' : ''}
-    `">
+    `" @click.native="setRoute">
     <slot>Route</slot>
   </router-link>
 </template>
@@ -28,6 +28,12 @@ export default {
         '--hover-color': this.hoverColor,
         '--active-color': this.activeColor
       }
+    }
+  },
+  methods: {
+    setRoute () {
+      console.log(`route set to ${this.to}`)
+      this.$parent.$emit('set-route', this.to)
     }
   }
 }
