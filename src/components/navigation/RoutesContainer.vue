@@ -1,6 +1,6 @@
 <template>
   <div class="dv-routes-container">
-    <slot @set-route="moveIndicator">Route List</slot>
+    <slot>Route List</slot>
     <div class="dv-routes-container-active"/>
   </div>
 </template>
@@ -10,6 +10,9 @@ export default {
   data: () => ({
     activeRoute: null
   }),
+  created () {
+    this.$on('set-route', this.moveIndicator)
+  },
   methods: {
     moveIndicator (route) {
       console.log(`received emit for ${route}`)
