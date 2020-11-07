@@ -33,7 +33,7 @@ export default {
   methods: {
     setRoute () {
       console.log(`route set to ${this.to}`)
-      this.$parent.$emit('set-route', this.to)
+      this.$parent.$emit('set-route', this)
     }
   }
 }
@@ -57,10 +57,10 @@ export default {
     transition: box-shadow .25s ease;
     &:not(.dv-main-link) {
       &.router-link-active {
-        box-shadow: 0 5px 0 0 var(--active-color) !important;
+        // box-shadow: 0 5px 0 0 var(--active-color) !important;
       }
       &:hover {
-        box-shadow: 0 8px 0 0 var(--hover-color);
+        // box-shadow: 0 8px 0 0 var(--hover-color);
       }
     }
   }

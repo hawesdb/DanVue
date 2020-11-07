@@ -12,6 +12,7 @@
       <dv-routes-container>
         <dv-route to="/Projects">Project</dv-route>
         <dv-route to="/About">About</dv-route>
+        <dv-route to="/About">This is a big word test</dv-route>
       </dv-routes-container>
     </dv-navbar>
     <router-view/>
