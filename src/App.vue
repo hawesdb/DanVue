@@ -10,9 +10,9 @@
     <dv-navbar>
       <dv-route to="/" mainLink>DanielHawes</dv-route>
       <dv-routes-container>
+        <!-- <dv-route to="/">Home</dv-route> -->
         <dv-route to="/Projects">Project</dv-route>
-        <dv-route to="/About">About</dv-route>
-        <dv-route to="/About">This is a big word test</dv-route>
+        <dv-route to="/About">About me, boy this is long</dv-route>
       </dv-routes-container>
     </dv-navbar>
     <router-view/>

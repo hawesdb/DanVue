@@ -1,8 +1,8 @@
 <template>
-  <router-link :to="to" class="dv-route" :style="cssVars" :class="`
+  <router-link :to="to" class="dv-route" :class="`
     ${mainLink ? 'dv-main-link' : ''}
     ${stretch ? 'dv-stretch' : ''}
-    `" @click.native="setRoute">
+    `">
     <slot>Route</slot>
   </router-link>
 </template>
@@ -21,20 +21,6 @@ export default {
       type: String,
       default: '#f8af5e'
     }
-  },
-  computed: {
-    cssVars () {
-      return {
-        '--hover-color': this.hoverColor,
-        '--active-color': this.activeColor
-      }
-    }
-  },
-  methods: {
-    setRoute () {
-      console.log(`route set to ${this.to}`)
-      this.$parent.$emit('set-route', this)
-    }
   }
 }
 </script>
@@ -50,17 +36,25 @@ export default {
     align-self: stretch;
     place-items: center;
     justify-content: center;
+    position: relative;
     padding: 0 8px;
     color: #2D2D2D;
     text-decoration: none;
     font-family: 'Ubuntu', sans-serif;
-    transition: box-shadow .25s ease;
+    transition: box-shadow .25s ease, background-color 1s ease;
     &:not(.dv-main-link) {
-      &.router-link-active {
-        // box-shadow: 0 5px 0 0 var(--active-color) !important;
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: -5px;
+        right: 0;
+        bottom: -5px;
+        background-color: rgba(0,0,0,0);
+        transition: background-color .25s ease;
       }
-      &:hover {
-        // box-shadow: 0 8px 0 0 var(--hover-color);
+      &:hover:after {
+        background-color: rgba(0,0,0,.05);
       }
     }
   }
